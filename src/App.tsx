@@ -1,7 +1,6 @@
-import { useState, useEffect } from "react";
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Details from "./components/history/Details";
-import Index from "./components/history/Index";
+import HistoryHome from "./components/history/HistoryHome";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Account from "./pages/Account";
@@ -24,7 +23,7 @@ function App() {
           <Route path="payment" element={<Payment />} />
           <Route path="account" element={<Account />} />
           <Route path="history" element={<History />}>
-            <Route index element={<Index />} />
+            <Route index element={<HistoryHome />} />
             <Route path=":id" element={<Details />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />

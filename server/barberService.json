@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Regular Haircut",
+    "price": "150.000",
+    "duration": "45 minutes"
+  },
+  {
+    "id": 2,
+    "name": "Special Haircut",
+    "price": "200.000",
+    "duration": "55 minutes"
+  },
+  {
+    "id": 3,
+    "name": "Complete Package",
+    "price": "250.000",
+    "duration": "60 minutes"
+  }
+]

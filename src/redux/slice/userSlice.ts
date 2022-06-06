@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "../../interfaces";
+import { User, Booking } from "../../interfaces";
 
 interface UserState {
   isLoggedIn: boolean;
@@ -15,19 +15,57 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginSuccess: (state, action: PayloadAction<object>) => {
+    login: (state, action: PayloadAction<object>) => {
       state.currentUser = action.payload as User;
       state.isLoggedIn = true;
     },
-    logoutSuccess: (state) => {
-      state.isLoggedIn = false;
+    logout: (state) => {
       state.currentUser = null;
+      state.isLoggedIn = false;
     },
-    createBooking: (state, action: PayloadAction<object>) => {
-      // Pass
+    setBookingCart: (
+      state,
+      action: PayloadAction<{ field: string; value: string }>
+    ) => {
+      if (state.currentUser) {
+        state.currentUser.booking_cart[action.payload.field as keyof Booking] =
+          action.payload.value;
+      }
+    },
+    createBooking: (state) => {
+      if (state.currentUser) {
+        state.currentUser.current_booking =
+          state.currentUser?.booking_cart.invoice_id;
+
+        state.currentUser.booking_cart = {
+          invoice_id: "",
+          barber_id: "",
+          service_id: "",
+          rating: "",
+          date: "",
+          time: "",
+          price: "",
+          payment: "",
+          feedback: "",
+        };
+      }
+    },
+    resetCurrentBook: (state) => {
+      if (state.currentUser) state.currentUser.current_booking = "";
+    },
+    refreshBookingHistory: (state, action: PayloadAction<Array<Booking>>) => {
+      if (state.currentUser)
+        state.currentUser.booking_history = [...action.payload];
     },
   },
 });
 
-export const { loginSuccess, logoutSuccess } = userSlice.actions;
+export const {
+  login,
+  logout,
+  setBookingCart,
+  createBooking,
+  resetCurrentBook,
+  refreshBookingHistory,
+} = userSlice.actions;
 export default userSlice.reducer;

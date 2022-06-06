@@ -16,7 +16,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userReducer from "./slice/userSlice";
-import undoable from "redux-undo";
+import stateReducer from "./slice/actionState";
 
 const persistConfig = {
   key: "root",
@@ -26,6 +26,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: userReducer,
+  actionState: stateReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

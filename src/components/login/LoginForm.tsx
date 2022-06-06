@@ -6,18 +6,20 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
 interface FormProps {
-  handleLogin: () => void;
+  handleLogin: () => Promise<void>;
   phoneNumber: number;
+  err: boolean;
   setPhoneNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const LoginForm: FC<FormProps> = ({
+  setPhoneNumber,
   handleLogin,
   phoneNumber,
-  setPhoneNumber,
+  err,
 }) => {
   return (
-    <Box>
+    <Box display="flex" flexDirection="column" justifyContent="center">
       <Typography
         fontWeight="light"
         variant="subtitle1"
@@ -43,14 +45,20 @@ const LoginForm: FC<FormProps> = ({
             id="phone_number"
             name="phone_number"
             variant="standard"
-            type="number"
-            inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
+            type="tel"
+            error={err}
+            helperText={err && "Wrong number"}
+            inputProps={{
+              inputMode: "numeric",
+              pattern: "[0-9]*",
+              maxLength: 12,
+            }}
             sx={{ input: { color: "white" } }}
             onChange={(e) => setPhoneNumber(Number(e.target.value))}
           />
         </Box>
       </Box>
-      <Box mt={6} display="flex" justifyContent="center">
+      <Box mt={4} display="flex" justifyContent="center">
         <Button
           variant="outlined"
           size="medium"
@@ -64,9 +72,19 @@ const LoginForm: FC<FormProps> = ({
             fontSize: 15,
             fontWeight: "light",
             color: "#fff",
+            "&:hover": {
+              backgroundColor: "#b9afac",
+              borderColor: "transparent",
+              boxShadow: "none",
+            },
+            "&:active": {
+              boxShadow: "none",
+              backgroundColor: "#b9afac",
+              borderColor: "#b9afac",
+            },
           }}
           onClick={handleLogin}
-          disabled={String(phoneNumber).length < 10}
+          disabled={String(phoneNumber).length < 11}
         >
           Masuk
         </Button>
