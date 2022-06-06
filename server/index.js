@@ -8,8 +8,9 @@ const client = require("twilio")(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
 );
+
 const PORT = 3001;
-const placeholderOTP = "319723";
+const placeholderOTP = "111111";
 
 app.use(
   cors({
@@ -32,19 +33,21 @@ app.post("/api/otp", (req, res) => {
     return;
   }
 
-  client.messages
-    .create({
-      from: process.env.TWILIO_PHONE_NUMBER,
-      to: "+62" + req.body.to,
-      body: `The OTP is ${placeholderOTP}`,
-    })
-    .then(() => {
-      res.status(200).json({ success: true, message: "OTP Sent", user: user });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ success: false, message: "Server Error" });
-    });
+  res.status(200).json({ success: true, message: "OTP Sent", user: user });
+
+  // client.messages
+  //   .create({
+  //     from: process.env.TWILIO_PHONE_NUMBER,
+  //     to: "+62" + req.body.to,
+  //     body: `The OTP is ${placeholderOTP}`,
+  //   })
+  //   .then(() => {
+  //     res.status(200).json({ success: true, message: "OTP Sent", user: user });
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //     res.status(500).json({ success: false, message: "Server Error" });
+  //   });
 });
 
 app.post("/api/verifyOtp", (req, res) => {

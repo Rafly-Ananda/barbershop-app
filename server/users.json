@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "phone_number": 81324498314,
+    "name": "Rafly Ananda Soemantri",
+    "email": "anandarafly15@gmail.com",
+    "id": "0",
+    "current_booking": "",
+    "booking_history": [],
+    "booking_cart": {}
+  }
+]
