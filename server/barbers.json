@@ -1,7 +1,1 @@
-[
-  { "name": "John Doe", "rating": 4, "id": 1 },
-  { "name": "Lenox Wendi", "rating": 5, "id": 2 },
-  { "name": "Cara Anima", "rating": 4, "id": 3 },
-  { "name": "Mark Rowley", "rating": 5, "id": 4 },
-  { "name": "Rica Angelle", "rating": 5, "id": 5 }
-]
+[{"name":"John Doe","rating":4,"id":1},{"name":"Lenox Wendi","rating":5,"id":2},{"name":"Cara Anima","rating":1,"id":3},{"name":"Mark Rowley","rating":3,"id":4},{"name":"Rica Angelle","rating":5,"id":5}]

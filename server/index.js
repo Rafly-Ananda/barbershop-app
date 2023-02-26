@@ -35,19 +35,19 @@ app.post("/api/otp", (req, res) => {
 
   res.status(200).json({ success: true, message: "OTP Sent", user: user });
 
-  // client.messages
-  //   .create({
-  //     from: process.env.TWILIO_PHONE_NUMBER,
-  //     to: "+62" + req.body.to,
-  //     body: `The OTP is ${placeholderOTP}`,
-  //   })
-  //   .then(() => {
-  //     res.status(200).json({ success: true, message: "OTP Sent", user: user });
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //     res.status(500).json({ success: false, message: "Server Error" });
-  //   });
+  client.messages
+    .create({
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: "+62" + req.body.to,
+      body: `The OTP is ${placeholderOTP}`,
+    })
+    .then(() => {
+      res.status(200).json({ success: true, message: "OTP Sent", user: user });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json({ success: false, message: "Server Error" });
+    });
 });
 
 app.post("/api/verifyOtp", (req, res) => {
